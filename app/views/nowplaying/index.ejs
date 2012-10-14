@@ -1,0 +1,45 @@
+    <div data-role="page" data-title="<%- title %>">
+        <div data-role="header" data-position="fixed">
+            <h1><%- title %></h1>
+        </div>
+
+        <div data-role="content">
+            <div id="nowplay_content" style="display:none">
+                <table>
+                    <tr id="nowplaying_albumart_c">
+                        <th>Art</th>
+                        <td><img id="nowplaying_albumart" alt="" /></td>
+                    </tr>
+                    <tr id="nowplaying_title_c" class="nowplaying_meta">
+                        <th>Title</th>
+                        <td id="nowplaying_title"></td>
+                    </tr>
+                    <tr id="nowplaying_artist_c" class="nowplaying_meta">
+                        <th>Artist</th>
+                        <td id="nowplaying_artist"></td>
+                    </tr>
+                    <tr id="nowplaying_album_c" class="nowplaying_meta">
+                        <th>Album</th>
+                        <td id="nowplaying_album"></td>
+                    </tr>
+                </table>
+
+                Status: <span id="nowplay_songPosition_h"></span> of <span id="nowplay_songTotal_h"></span>
+                <div id="nowplaying_progressbar"></div>
+
+                <div id="nowplay_upnext_c" style="display:none">
+                    Up Next: <span id="nowplay_upnext"></span>
+                </div>
+            </div>
+
+            <div id="nowplay_nothing">
+                <h1>Nothing is playing</h1>
+            </div>
+        </div>
+
+        <div data-role="footer" class="ui-bar" data-position="fixed">
+            <a href="/nowplaying/index" data-role="button" class="ui-btn-active">Now Playing</a>
+            <a href="/queue/music" data-role="button">Music</a>
+            <a href="/queue/list" data-role="button">Queue</a>
+        </div>
+    </div>

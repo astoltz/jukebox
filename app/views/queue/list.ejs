@@ -1,0 +1,63 @@
+    <div data-role="page" data-title="<%- title %>">
+        <div data-role="header" data-position="fixed">
+            <h1><%- title %></h1>
+        </div>
+
+        <div data-role="content">
+            <div class="content-primary">
+                <ul data-role="listview">
+<%
+var /*hadFuture    = false,
+    hadSeparator = false,*/
+    hadFirst     = false;
+for(x in libraryData) {
+    var row          = libraryData[x],
+        durationText = "",
+        isFirst      = false;
+
+    /*if (hadFuture && !hadSeparator && row.PlayTime !== null) {
+        hadSeparator = true;
+        %><li data-role="list-divider"></li><%
+    } else if (row.PlayTime === null) {
+        hadFuture = true;
+    }*/
+
+    if (!hadFirst && row.PlayTime !== null) {
+        isFirst  = true;
+        hadFirst = true;
+    }
+
+    if (row.Duration >= 3600) {
+        durationText += Math.floor(row.Duration / 3600).toString() + ':';
+    }
+
+    if (row.Duration % 3600 / 60 < 10) {
+        durationText += '0';
+    }
+    durationText += Math.floor(row.Duration % 3600 / 60) + ':';
+
+    if (row.Duration % 3600 % 60 < 10) {
+        durationText += '0';
+    }
+    durationText += row.Duration % 3600 % 60;
+%>
+                    <li <% if (isFirst) { %> data-theme="b" <% } %> >
+                        <h3><%- row.song.Name %></h3>
+                        <p>
+                            <br />Queued: <%- row.QueueTime.toLocaleString() %>
+                            <% if (row.PlayTime !== null) { %>
+                            <br />Played: <%- row.PlayTime.toLocaleString() %>
+                            <% } %>
+                        </p>
+                    </li>
+<% } %>
+                </ul>
+            </div>
+        </div>
+
+        <div data-role="footer" class="ui-bar" data-position="fixed">
+            <a href="/nowplaying/index" data-role="button">Now Playing</a>
+            <a href="/queue/music" data-role="button">Music</a>
+            <a href="/queue/list" data-role="button" class="ui-btn-active">Queue</a>
+        </div>
+    </div>

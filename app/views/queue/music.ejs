@@ -1,0 +1,54 @@
+    <div data-role="page" data-title="<%- title %>">
+        <div data-role="header" data-position="fixed">
+            <h1><%- title %></h1>
+        </div>
+
+        <div data-role="content">
+            <div class="content-primary">
+                <ul data-role="listview" data-filter="true" data-filter-placeholder="Search song...">
+<%
+for(x in libraryData) {
+    var row = libraryData[x],
+        durationText = "";
+
+    if (row.Duration >= 3600) {
+        durationText += Math.floor(row.Duration / 3600).toString() + ':';
+    }
+
+    if (row.Duration % 3600 / 60 < 10) {
+        durationText += '0';
+    }
+    durationText += Math.floor(row.Duration % 3600 / 60) + ':';
+
+    if (row.Duration % 3600 % 60 < 10) {
+        durationText += '0';
+    }
+    durationText += row.Duration % 3600 % 60;
+%>
+                    <li data-icon="check" data-filtertext="<%- row.Name %>">
+                        <a href="/queue/add/<%- row.id -%>" data-rel="dialog">
+                        <h3><%- row.Name %></h3>
+                        <p>
+                            Duration: <%- durationText %>
+                            <% if (row.PlayCount > 0) { %>
+                            <br />Play Count: <%- row.PlayCount %>
+                            <br />Last Played: <%- row.LastPlayed.toLocaleString() %>  
+                            <% } %>
+                        </p>
+                        </a>
+                        <!--div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <a href="#thumbup_<%- row.id -%>" data-role="button" data-icon="plus">Thumbs Up</a>
+                            <a href="#thumbdown_<%- row.id -%>" data-role="button" data-icon="minus">Thumbs Down</a>
+                        </div-->
+                    </li>
+<% } %>
+                </ul>
+            </div>
+        </div>
+
+        <div data-role="footer" class="ui-bar" data-position="fixed">
+            <a href="/nowplaying/index" data-role="button">Now Playing</a>
+            <a href="/queue/music" data-role="button" class="ui-btn-active">Music</a>
+            <a href="/queue/list" data-role="button">Queue</a>
+        </div>
+    </div>

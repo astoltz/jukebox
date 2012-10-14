@@ -1,0 +1,13 @@
+    <div data-role="page" data-title="<%- title %>">
+        <div data-role="header" data-position="fixed">
+            <h1><%- title %></h1>
+        </div>
+
+        <div data-role="content">
+            <% if (typeof errorMessage !== "undefined") { %>
+                <%- errorMessage %>
+            <% } else { %>
+                Your song has been succesfully queued.
+            <% } %>
+        </div>
+    </div>
