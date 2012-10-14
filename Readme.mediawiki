@@ -1,0 +1,15 @@
+1) Install VLC and enable the web interface
+
+http://randomtechtips007.blogspot.com/2012/03/how-to-enable-http-interface-in-vlc.html
+
+2) Add music to your library
+
+3) Install NodeJS
+
+4) Install Dependencies
+
+ npm install -l
+
+5) Start the server
+
+ node server.js
