@@ -7,6 +7,8 @@ Linux:
 2) Add music to your library
 
 3) Install NodeJS (v 0.8.5 +)
+
+Ubuntu:
  sudo apt-get install python-software-properties
  sudo add-apt-repository ppa:chris-lea/node.js
  sudo apt-get update
