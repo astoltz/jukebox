@@ -21,3 +21,6 @@ Ubuntu:
 5) Start the server
 
  node server.js
+
+Commit syntax
+ #ticketNumber message
