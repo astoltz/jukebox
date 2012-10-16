@@ -12,14 +12,12 @@ module.exports.populateMediaLibrary = function() {
     module.vlc.readLibrary('Media Library', function(libraryData) {
         var loaded = 0;
         for (x in libraryData) {
-            if (libraryData[x].type == 'leaf') {
-                loaded++;
-                MediaLibrary.create({
-                    Name:     libraryData[x].name,
-                    Duration: libraryData[x].duration,
-                    Uri:      libraryData[x].uri
-                });
-            }
+            loaded++;
+            MediaLibrary.create({
+                Name:     libraryData[x].name,
+                Duration: libraryData[x].duration,
+                Uri:      libraryData[x].uri
+            });
         }
         console.log("%s songs loaded into the Media Library", loaded);
     });
@@ -77,15 +75,31 @@ module.vlc = {
             res.on('data', function (data) {
                 chunkData += data.toString();
             }).on('end', function (data) {
-                var libraryData  = JSON.parse(chunkData).children;
+                var jsonData    = JSON.parse(chunkData).children,
+                    libraryData = [];
 
                 // Find our media library
-                for (x in libraryData) {
-                    if (libraryData[x].type == 'node' && libraryData[x].name === library) {
-                        libraryData = libraryData[x].children;
+                for (x in jsonData) {
+                    if (jsonData[x].type == 'node' && jsonData[x].name === library) {
+                        jsonData = jsonData[x].children;
                         break;
                     }
                 }
+
+                // Find all the songs recursively
+                var treeWalker = function(jsonData) {
+                    for (x in jsonData) {
+                        switch (jsonData[x].type) {
+                            case 'node':
+                                treeWalker(jsonData[x].children);
+                                break;
+                            case 'leaf':
+                                libraryData.push(jsonData[x]);
+                                break;
+                        }
+                    }
+                };
+                treeWalker(jsonData);
 
                 if (typeof cb === 'function') {
                     cb.call(this, libraryData);
