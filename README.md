@@ -1,6 +1,7 @@
 1) Install VLC and enable the web interface (v 2 +)
 
 [Windows](http://randomtechtips007.blogspot.com/2012/03/how-to-enable-http-interface-in-vlc.html)
+
 Linux:
 `vlc -I ncurses --extraintf http`
 
