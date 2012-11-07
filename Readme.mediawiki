@@ -24,3 +24,8 @@ Ubuntu:
 
 Commit syntax
  #ticketNumber message
+
+Notes
+-------------------
+
+- [node speaker](https://github.com/TooTallNate/node-speaker)
